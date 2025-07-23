@@ -1,0 +1,110 @@
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f2f5f9;
+        color: #333;
+    }
+
+    #logo{
+        /* border: 1px solid black; */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #logo img{
+        height: 100px;
+        width: 350px;
+    }
+    h3 {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    form {
+        max-width: 500px;
+        margin: auto;
+        background: #ffffff;
+        padding: 25px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: 500;
+        color: #34495e;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        background-color: #2ecc71;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+  
+
+  #select2-teamLeader-container{
+    overflow: visible;
+
+  }
+    button:hover {
+        background-color: #27ae60;
+    }
+
+    #savedData {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 14px;
+        color: #2d3436;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        background: #ecf0f1;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .select2-container--default .select2-selection--multiple {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        min-height: 40px;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        form {
+            padding: 20px;
+        }
+
+        input, select, button {
+            font-size: 14px;
+        }
+    }
