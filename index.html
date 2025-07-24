@@ -3,17 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Project Team Form with Firebase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title>IPD Agni College of Technology</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="logo">
-        <!-- <img src="1753282856993.jpg" alt="Agni Logo"> -->
-        <img src="AGNI-LOGO-AUTO.png" alt="Agni_logo">
+        <div class="logo-image">
+            <img src="AGNI-LOGO-AUTO.png" alt="Agni Left Logo">
         </div>
-    <h3>Agni College of Technology -Project Team Details</h3>
+        <div class="logo-text">
+            <h1>Agni College of Technology</h1>
+        </div>
+        <div class="logo-image">
+            <img src="1753282856993.jpg" alt="Agni Right Logo">
+        </div>
+    </div>
+
+    <h3>Agni College of Technology - IPD Project Team Details</h3>
     <form id="teamForm">
         Team Name: <input type="text" name="teamName" required>
         <label for="teamLeader">Team Leader:</label>
@@ -21,16 +30,15 @@
 
         Mobile No: <input type="number" name="mobile" required>
         Mail ID: <input type="email" name="email" required>
-        Dept: <input type="text" name="dept" required>
 
         <label for="studentSelect">Select up to 4 Students:</label>
         <select id="studentSelect" name="students" multiple required></select>
 
         <br><br>
-        <button type="submit">Save</button>
+        <button type="submit">Submit</button>
     </form>
 
-    <pre id="savedData"></pre>
+    <!-- <pre id="savedData"></pre> -->
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
@@ -719,7 +727,7 @@
         ];
 
         const select = document.getElementById("studentSelect");
-        const savedDataDiv = document.getElementById("savedData");
+        // const savedDataDiv = document.getElementById("savedData");
 
         async function loadStudents() {
             const usedStudentsSnapshot = await db.collection("projectTeams").get();
@@ -759,7 +767,6 @@
             $('#studentSelect').select2({
                 placeholder: "Search and select students",
                 maximumSelectionLength: 4,
-                minimumInputLength: 3,
                 allowClear: true
             });
 
@@ -775,19 +782,22 @@
             const selectedStudents = $('#studentSelect').val().map(s => JSON.parse(s));
             const teamLeader = JSON.parse($('#teamLeader').val());
 
+            if (selectedStudents.length < 3) {
+                alert("Please select at least 3 students.");
+                return;
+            }
+
             const teamData = {
                 teamName: formData.get("teamName"),
                 teamLeader: teamLeader,
                 mobile: formData.get("mobile"),
                 email: formData.get("email"),
-                dept: formData.get("dept"),
                 students: selectedStudents,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp()
             };
 
             try {
                 await db.collection("projectTeams").add(teamData);
-                savedDataDiv.textContent = JSON.stringify(teamData, null, 2);
                 alert("Team Saved!");
                 location.reload(); // Refresh to update student list
             } catch (err) {
